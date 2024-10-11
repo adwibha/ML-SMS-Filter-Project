@@ -1,111 +1,126 @@
-Project name: Machine learning-based SMS Spam Filtering
+### Machine Learning based SMS Spam Filtering
 
-Part 1: Below are the instructions to execute the code and generate an arff file.
+#### Part 1: Code Execution and ARFF File Generation
 
-1\. Please make sure the below files are in the same directory.
+Follow the instructions below to execute the code and generate the ARFF (Attribute-Relation File Format) file for use with the WEKA machine learning tool.
 
-a. smsfiltering.js
+1. **Ensure Required Files Are in the Same Directory:**
 
-b. english_big.txt
+   - `smsfiltering.js`
+   - `english_big.txt`
 
-2\. Open the working directory where the files are located through command prompt or terminal.
+2. **Open the Working Directory:**
 
-3\. Please ensure you have Node.js installed on your machine, we need this to run our code while since it is written in JavaScript.
+   - Use the command prompt (Windows) or terminal (Linux/macOS) to navigate to the directory containing the files.
 
-4\. If Node.js is installed, please proceed to step 6 directly to run the code. Else, please follow the instructions in step 5 to install Node.js on your machine.
+3. **Node.js Installation:**
+   - The code is written in JavaScript and requires Node.js to run. Ensure Node.js is installed on your machine.
+4. **If Node.js Is Installed:**
 
-5\. To run JavaScript code on Windows, Linux, or macOS machines, you'll need to use the Node.js runtime, which allows you to execute JavaScript code outside of web browsers. Here are the steps to run JavaScript code:
+   - Skip to Step 6 to execute the code directly.
 
-A. Install Node.js (if not already installed):
+5. **Installing Node.js:**
+   If Node.js is not already installed, follow the steps below:
 
-- Windows: You can download the Windows Installer for Node.js from the official Node.js website (https://nodejs.org/), run the installer, and follow the installation instructions.
+   **A. Install Node.js:**
 
-- Linux: You can use your system's package manager to install Node.js.
+   - **Windows**: Download and install Node.js from the official website [Node.js](https://nodejs.org/).
+   - **Linux**:
 
-For example, on Ubuntu or Debian, you can use \`apt\`:
+     - On Ubuntu or Debian:
+       ```bash
+       sudo apt update
+       sudo apt install nodejs
+       ```
+     - On Red Hat, CentOS, or Fedora:
+       ```bash
+       sudo yum install nodejs
+       ```
+       Ensure you install Node Package Manager (npm) as well.
 
-> sudo apt update
+   - **macOS**: Install Node.js using Homebrew:
+     1. If Homebrew is not installed, follow instructions on [Homebrew's website](https://brew.sh/).
+     2. After installing Homebrew, run:
+        ```bash
+        brew install node
+        ```
 
-> sudo apt install nodejs
+   **B. Running JavaScript Code:**
 
-On Red Hat, CentOS, or Fedora, you can use \`yum\` or \`dnf\`:
+   - **Command Line**:
 
-> sudo yum install nodejs
+     1. Open the terminal or command prompt.
+     2. Navigate to the directory where `smsfiltering.js` is located.
+     3. Execute the script with:
+        ```bash
+        node smsfiltering.js
+        ```
 
-Be sure to install Node Package Manager (npm) as well.
+   - **Using an IDE**: If you're using an IDE like Visual Studio Code, open the `.js` file and run the script using the integrated terminal. Simply execute:
+     ```bash
+     node smsfiltering.js
+     ```
 
-- macOS: You can use Homebrew to install Node.js on macOS. If you don't have Homebrew installed, you can find installation instructions at https://brew.sh/. After installing Homebrew, run:
+   **C. Viewing the Output:**
 
-> brew install node
+   - The terminal will display the output of the script. For debugging or testing, you can use `console.log()` to print specific messages or data in the code.
 
-B. Run JavaScript Code:
+6. **Execute the Code:**
+   Run the following command in the terminal:
 
-- Using Command Line (Terminal): Open your command line terminal (Command Prompt on Windows, Terminal on macOS, or Terminal on Linux). Navigate to the directory where your JavaScript file is located. Use the \`node\` command to run your JavaScript file. For example:
+   ```bash
+   node smsfiltering.js
+   ```
 
-> node .js
+7. **ARFF File Generation:**
+   The script will generate an ARFF file. This file format is used by WEKA for machine learning tasks, including SMS spam filtering.
 
-In our case, we use below file to execute our code -
+---
 
-> node smsfiltering.js
+#### Part 2: Using WEKA for SMS Spam Detection
 
-- Using an IDE: Many code editors and IDEs have built-in support for running JavaScript code. If you're using an IDE like Visual Studio Code, you can open your \`.js\` file and use its built-in terminal or integrated terminal to run your script. Just open the terminal and run \`node smsfiltering.js\`.
+This section explains how to use WEKA to load the ARFF file and apply machine learning algorithms for SMS spam classification. You will use the following five classifiers with cross-validation: **Decision Tree (J48), Multinomial Naive Bayes, K-Nearest Neighbors (KNN), SVM (LibSVM), and RandomForest**. Afterward, you will analyze the results for Accuracy, True Positive Rate (TPR), and False Positive Rate (FPR) for each classifier.
 
-C. View Output:
+##### Step 1: Launch WEKA
 
-The terminal or console will display the output of your JavaScript code. You can also use \`console.log()\` in your code to print messages and data to the terminal for debugging and testing purposes.
+1. **Install WEKA**: If WEKA is not already installed, download it from the [WEKA website](https://waikato.github.io/weka-wiki/downloading_weka/).
+2. **Run WEKA**: Open the WEKA application on your system.
 
-6\. Execute the below command -
+##### Step 2: Load the ARFF File
 
-> node smsfiltering.js
+3. In WEKA, click on the **Explorer** button to open the Explorer interface.
+4. Click **Open file** and navigate to the directory where the ARFF file is stored. Load the file, which contains the SMS spam dataset and its features.
 
-7\. It will generate an ARFF (Attribute-Relation File Format) file which is a plain text file format that is commonly used with the WEKA machine learning software.
+##### Step 3: Set the Class Attribute
 
-Part 2 : How to Use WEKA for SMS Spam Detection
+5. After loading the dataset, select the attribute representing the class label. In this case, it should be "class" with values "spam" and "ham." This attribute will be used for binary classification.
 
-These instructions will guide you through the process of opening an ARFF file in WEKA and running binary classifiers to identify SMS spam messages. The following five classification algorithms with Cross Validation will be used: Decision Tree (J48), Multinomial Naive Bayes, K-Nearest Neighbors, SVM (LibSVM), and RandomForest. You will need to follow these steps to analyze the experimental results, including Accuracy, True Positive Rate (TPR), and False Positive Rate (FPR) for each classifier.
+##### Step 4: Select Classifiers
 
-Step 1: Open WEKA
+6. Click on the **Classify** tab in the Explorer interface.
+7. In the **Classifier** section, select each of the following classifiers:
+   - J48 (Decision Tree)
+   - NaiveBayesMultinomial (Multinomial Naive Bayes)
+   - IBk (K-Nearest Neighbors)
+   - LibSVM (Support Vector Machine)
+   - RandomForest (Random Forest)
 
-1\. Ensure you have WEKA installed on your system. If it's not already installed, you can download it from the WEKA website (https://www.cs.waikato.ac.nz/ml/weka/).
+##### Step 5: Set Cross-Validation
 
-2\. Launch WEKA by running the WEKA application.
+8. WEKA performs cross-validation with **K=10** by default. You can retain these default settings.
 
-Step 2: Load the ARFF File
+##### Step 6: Run the Classifiers
 
-3\. In the WEKA GUI, click on the "Explorer" button to open the Explorer interface.
+9. For each classifier selected in Step 4, click the **Start** button to run it on your dataset. WEKA will evaluate the classifier's performance using cross-validation.
 
-4\. In the Explorer, click on the "Open file" button to load your ARFF file. Navigate to the directory where your ARFF file is located and select it. The ARFF file should contain your SMS spam dataset and the associated features.
+##### Step 7: Analyze the Results
 
-Step 3: Select the Class Attribute
+10. Once classification is complete, WEKA will display performance metrics, including:
 
-5\. Once your dataset is loaded, select the attribute that represents the class label. In this case, it should be "class" with values "spam" and "ham." We will use this attribute for binary classification.
+- **Accuracy**
+- **True Positive Rate (TPR)**
+- **False Positive Rate (FPR)**
 
-Step 4: Choose Classifiers
+Note these metrics for each classifier to compare their performance.
 
-6\. Click on the "Classify" tab in WEKA's Explorer.
-
-7\. Under the "Classifier" section, you will see a list of classifiers. Choose the following classifiers one by one:
-
-- J48 (Decision Tree)
-
-- NaiveBayesMultinomial (Multinomial Naive Bayes)
-
-- IBk (K-Nearest Neighbors)
-
-- LibSVM (Support Vector Machine)
-
-- RandomForest (Random Forest)
-
-Step 5: Set Cross Validation
-
-8\. By default, WEKA performs Cross Validation with K=10. You can leave the Cross-Validation settings at their defaults.
-
-Step 6: Run Classifiers
-
-9\. For each classifier selected in Step 4, click the "Start" button to run the classifier on your dataset. WEKA will evaluate the classifier's performance using Cross Validation.
-
-Step 7: Analyze Results
-
-10\. Once the classification is complete, WEKA will display the results, including Accuracy, True Positive Rate (TPR), and False Positive Rate (FPR) for each classifier. Note the performance metrics for analysis.
-
-Repeat Step 6 for each of the five classifiers to compare their performance in identifying SMS spam messages. The classifier with the best performance based on your analysis can be considered as the most suitable for your SMS spam detection task.
+Repeat **Step 6** for each of the five classifiers to assess which performs best in identifying SMS spam messages. The classifier with the highest accuracy and favorable TPR/FPR values may be deemed the most suitable for your SMS spam detection task.
