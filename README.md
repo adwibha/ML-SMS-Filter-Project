@@ -1,4 +1,4 @@
-### Machine Learning based SMS Spam Filtering
+### Machine Learning based SMS Spam Filtering using Node.js
 
 #### Part 1: Code Execution and ARFF File Generation
 
